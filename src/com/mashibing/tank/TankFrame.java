@@ -8,10 +8,8 @@ package com.mashibing.tank;
  * @author: Yao
  */
 public class TankFrame extends Frame {
-    int x = 200;
-    int y = 200;
-    Dir dir = Dir.DOWN;
-    final static int SPEED = 10;
+    Tank myTank = new Tank(200, 200, Dir.DOWN);
+
 
     public TankFrame() {
         setSize(800, 600);
@@ -33,25 +31,11 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g){
-        g.fillRect(x, y, 50, 50);
+        myTank.paint(g);
 
-        switch (dir) {
-            case LEFT:
-                x -= SPEED;
-                break;
-            case UP:
-                y -= SPEED;
-                break;
-            case DOWN:
-                y += SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            default:
-                break;
-        }
     }
+
+
 
     public class MyKeyListener extends KeyAdapter {
         boolean bL = false;
@@ -88,19 +72,15 @@ public class TankFrame extends Frame {
             switch (key) {
                 case KeyEvent.VK_LEFT:
                     bL = false;
-                    x -= 10;
                     break;
                 case KeyEvent.VK_RIGHT:
                     bR = false;
-                    x += 10;
                     break;
                 case KeyEvent.VK_UP:
                     bU = false;
-                    y -= 10;
                     break;
                 case KeyEvent.VK_DOWN:
                     bD = false;
-                    y += 10;
                     break;
                 default:
                     break;
@@ -110,10 +90,11 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            if(bL) dir = Dir.LEFT;
-            if(bR) dir = Dir.RIGHT;
-            if(bU) dir = Dir.UP;
-            if(bD) dir = Dir.DOWN;
+            if(bL) myTank.setDir(Dir.LEFT);
+            if(bR) myTank.setDir(Dir.RIGHT);
+            if(bU) myTank.setDir(Dir.UP);
+            if(bD) myTank.setDir(Dir.DOWN);
+
         }
     }
 
