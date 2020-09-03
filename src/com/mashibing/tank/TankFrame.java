@@ -9,6 +9,7 @@ package com.mashibing.tank;
  */
 public class TankFrame extends Frame {
     Tank myTank = new Tank(200, 200, Dir.DOWN);
+    Bullet bullet = new Bullet(300, 300, Dir.DOWN);
 
 
     public TankFrame() {
@@ -32,6 +33,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g){
         myTank.paint(g);
+        bullet.paint(g);
 
     }
 
@@ -90,14 +92,17 @@ public class TankFrame extends Frame {
         }
 
         private void setMainTankDir() {
-            if(bL) myTank.setDir(Dir.LEFT);
-            if(bR) myTank.setDir(Dir.RIGHT);
-            if(bU) myTank.setDir(Dir.UP);
-            if(bD) myTank.setDir(Dir.DOWN);
-
+            if (!bL & !bU & !bR & !bD) {
+                myTank.setMoving(false);
+            } else {
+                myTank.setMoving(true);
+                if (bL) myTank.setDir(Dir.LEFT);
+                if (bR) myTank.setDir(Dir.RIGHT);
+                if (bU) myTank.setDir(Dir.UP);
+                if (bD) myTank.setDir(Dir.DOWN);
+            }
         }
+
     }
-
-
 
 }
